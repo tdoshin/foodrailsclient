@@ -8,7 +8,7 @@ import {Route,Switch, Link} from "react-router-dom";
 const url = "https://foodrails.herokuapp.com/foodmodels/"
 
 
-function App() {
+function App(props) {
   //Style Objects///////////////////////////////////////////////
 
   const h1 = {
@@ -31,6 +31,8 @@ function App() {
     image: ""
   }
 
+  const [targetFood, setTargetFood] = useState(nullFood)
+
   //Functions ////////////////////////////////////////////////
 
   const getFoods = async() => {
@@ -47,6 +49,22 @@ function App() {
       },
       body: JSON.stringify(newFood)
     })
+    getFoods()
+  }
+
+  const getTargetFood = (food) => {
+    setTargetFood(food)
+    props.history.psuh("/edit")
+  }
+  
+  const updateFood = async(food) => {
+    const response = await fetch(url + food.id + "/", {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json"},
+      body: JSON.stringify(food)
+    })
+
     getFoods()
   }
 
@@ -70,7 +88,9 @@ function App() {
           />
           <Route
             path="/food/:id"
-            render={(rp) => <SingleFood foods={foods} {...rp}/>}
+            render={(rp) => <SingleFood foods={foods}
+            edit={getTargetFood} 
+            {...rp}/>}
           
           />
           <Route
@@ -84,7 +104,11 @@ function App() {
 
           <Route
             path="/edit"
-            render={(rp) => <Form {...rp}/>}
+            render={(rp) => <Form
+              initialFood={targetFood}
+              handleSubmit={updateFood}
+              buttonLabel="update food"
+              {...rp}/>}
           
           />
 
