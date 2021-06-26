@@ -43,12 +43,12 @@ function App() {
           <Route
             exact
             path="/"
-            render={(rp) => <AllFoods {...rp}/>}
+            render={(rp) => <AllFoods foods = {foods} {...rp}/>}
           
           />
           <Route
             path="/food/:id"
-            render={(rp) => <SingleFood {...rp}/>}
+            render={(rp) => <SingleFood foods={foods} {...rp}/>}
           
           />
           <Route
