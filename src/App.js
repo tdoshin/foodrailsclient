@@ -21,9 +21,21 @@ function App() {
   }
 
   //State and Other Variables
+  const [foods, setFoods] = useState([]);
 
-  //API URL
+  //Functions 
 
+  const getFoods = async() => {
+    const response = await fetch(url)
+    const data = await response.json()
+    setFoods(data)
+  }
+
+  //useEffects 
+
+  useEffect(() => {getFoods()}, [])
+ 
+  //Returned variables
     return (
       <div className="App">
         <h1 style={h1}>FoodRails</h1>
@@ -32,6 +44,22 @@ function App() {
             exact
             path="/"
             render={(rp) => <AllFoods {...rp}/>}
+          
+          />
+          <Route
+            path="/food/:id"
+            render={(rp) => <SingleFood {...rp}/>}
+          
+          />
+          <Route
+            path="/new"
+            render={(rp) => <Form {...rp}/>}
+          
+          />
+
+          <Route
+            path="/edit"
+            render={(rp) => <Form {...rp}/>}
           
           />
 
