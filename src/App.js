@@ -1,34 +1,53 @@
 import { useState, useEffect } from 'react';
-import Header from './components/Header';
-import Main from './components/Main';
-import Nav from './components/Nav';
 import React from 'react';
-import ReactDOM from 'react-dom';
 import AllFoods from "./pages/AllFoods";
 import SingleFood from "./pages/SingleFood";
 import Form from "./pages/Form";
-import {Route,Switch} from "react-router-dom";
+import {Route,Switch, Link} from "react-router-dom";
 
 const url = "https://foodrails.herokuapp.com/foodmodels/"
 
 
 function App() {
-  //Style Objects
+  //Style Objects///////////////////////////////////////////////
 
   const h1 = {
     textAlign: "center",
     margin: "10px"
   }
 
-  //State and Other Variables
+  const button = {
+    backgroundColor: "green",
+    display: "block",
+    margin: "auto"
+  }
+
+  //State and Other Variables/////////////////////////////////////
   const [foods, setFoods] = useState([]);
 
-  //Functions 
+  const nullFood = {
+    name: "",
+    recipe: "",
+    image: ""
+  }
+
+  //Functions ////////////////////////////////////////////////
 
   const getFoods = async() => {
     const response = await fetch(url)
     const data = await response.json()
     setFoods(data)
+  }
+
+  const addFoods = async (newFood) => {
+    const response = await fetch(url, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(newFood)
+    })
+    getFoods()
   }
 
   //useEffects 
@@ -39,6 +58,9 @@ function App() {
     return (
       <div className="App">
         <h1 style={h1}>FoodRails</h1>
+        <Link to="/new"><button style={button}>Create New Food</button>
+
+        </Link>
         <Switch>
           <Route
             exact
@@ -53,7 +75,10 @@ function App() {
           />
           <Route
             path="/new"
-            render={(rp) => <Form {...rp}/>}
+            render={(rp) => <Form initialFood={nullFood} 
+            handleSubmit={addFoods}
+            buttonLabel="create food"
+             {...rp}/>}
           
           />
 

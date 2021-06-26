@@ -9,7 +9,7 @@ const SingleFood= ({foods, match}) => {
     })
 
 
-    //Styles
+    //Styles//////////////////////////////////////
     const div = {
         textAlign: "center",
         border: "3px solid green",
@@ -17,13 +17,16 @@ const SingleFood= ({foods, match}) => {
         margin: "30px auto"
 
     }
-    return <div style={div}>
+    return (
+    <div style={div}>
         <h1>{food.image}</h1>
         <h2>{food.recipe}</h2>
         <Link to="/">
             <button>Go back</button>
         </Link>
     </div>
+
+    )
   }
   
   export default SingleFood;
