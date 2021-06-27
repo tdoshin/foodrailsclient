@@ -54,7 +54,7 @@ function App(props) {
 
   const getTargetFood = (food) => {
     setTargetFood(food)
-    props.history.psuh("/edit")
+    props.history.push("/edit")
   }
   
   const updateFood = async(food) => {
@@ -65,6 +65,13 @@ function App(props) {
       body: JSON.stringify(food)
     })
 
+    getFoods()
+  }
+
+  const deleteFood = async(food) => {
+    const response = await fetch (url + food.id + "/", {
+      method: "delete"
+    })
     getFoods()
   }
 
@@ -90,6 +97,7 @@ function App(props) {
             path="/food/:id"
             render={(rp) => <SingleFood foods={foods}
             edit={getTargetFood} 
+            deleteFood = {deleteFood}
             {...rp}/>}
           
           />

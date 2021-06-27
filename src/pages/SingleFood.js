@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom'
 
 
-const SingleFood= ({foods, match}) => {
+const SingleFood= ({foods, match, edit, deleteFood, history}) => {
     const id = parseInt(match.params.id)
     const food = foods.find((food) => {
         return food.id === id
@@ -21,6 +21,13 @@ const SingleFood= ({foods, match}) => {
     <div style={div}>
         <h1>{food.image}</h1>
         <h2>{food.recipe}</h2>
+        <button onClick={(event) => {
+            edit(food)
+        }}>EDIT</button>
+        <button onClick ={(event) => {
+            deleteFood(food)
+            history.push("/")
+        }}>DELETE FOOD</button>
         <Link to="/">
             <button>Go back</button>
         </Link>
