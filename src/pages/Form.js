@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-
+import {Link} from 'react-router-dom'
 
 
 const Form = ({initialFood,history,handleSubmit,buttonLabel}) => {
@@ -17,14 +17,18 @@ const Form = ({initialFood,history,handleSubmit,buttonLabel}) => {
         history.push("/")
     }
 
-    return <form onSubmit={handleSubmission}>
+    return <form onSubmit={handleSubmission} style={{padding: "30px"}}>
         <input
             type="text"
             placeholder="Enter Food Name"
             onChange={handleChange}
             value={formData.name}
             name="name"
+            style={{padding: "10px", borderRadius: "10px"}}
         />
+
+        <br/>
+        <br/>
 
         <input
             type="text"
@@ -32,7 +36,11 @@ const Form = ({initialFood,history,handleSubmit,buttonLabel}) => {
             onChange={handleChange}
             value={formData.recipe}
             name="recipe"
+            style={{padding: "10px", borderRadius: "10px"}}
         />
+
+        <br/>
+        <br/>
 
         <input
             type="text"
@@ -40,9 +48,19 @@ const Form = ({initialFood,history,handleSubmit,buttonLabel}) => {
             onChange={handleChange}
             value={formData.image}
             name="image"
+            style={{padding: "10px", borderRadius: "10px"}}
         />
 
-        <input type="submit" value={buttonLabel}/>
+        <br/>
+        <br/>
+
+        <input type="submit" value={buttonLabel} style={{padding: "10px", borderRadius: "10px"}}/>
+        <br/>
+        <br/>
+        <br/>
+        <Link to="/">
+            <button>Go back</button>
+        </Link>
     </form>
   }
   

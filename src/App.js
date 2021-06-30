@@ -81,13 +81,17 @@ function App(props) {
   //Returned variables
     return (
       <div className="App">
-        <h1 className="h1">Welcome to FoodRails</h1>
+        <h1 className="h1" >Welcome to FoodRails</h1>
         <div class="row">
     
           {(rp) => <AllFoods foods = {foods.img} {...rp}/>}
             
         </div>
-        <Link to="/new"><button style={button}>Click Here To Get Started</button>
+        <br/>
+
+        <Link to="/new"><button style={button} style={{borderRadius: "10px"}}>Click Here To Get Started</button>
+        <br/>
+        
         {(rp) => <AllFoods foods = {foods} {...rp}/>}
 
         </Link>
