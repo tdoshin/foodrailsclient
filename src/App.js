@@ -4,6 +4,8 @@ import AllFoods from "./pages/AllFoods";
 import SingleFood from "./pages/SingleFood";
 import Form from "./pages/Form";
 import {Route,Switch, Link} from "react-router-dom";
+import "./App.css"
+
 
 const url = "https://foodrails.herokuapp.com/foodmodels/"
 
@@ -11,16 +13,13 @@ const url = "https://foodrails.herokuapp.com/foodmodels/"
 function App(props) {
   //Style Objects///////////////////////////////////////////////
 
-  const h1 = {
-    textAlign: "center",
-    margin: "10px"
-  }
 
   const button = {
     backgroundColor: "green",
     display: "block",
     margin: "auto"
   }
+
 
   //State and Other Variables/////////////////////////////////////
   const [foods, setFoods] = useState([]);
@@ -82,8 +81,14 @@ function App(props) {
   //Returned variables
     return (
       <div className="App">
-        <h1 style={h1}>FoodRails</h1>
-        <Link to="/new"><button style={button}>Create New Food</button>
+        <h1 className="h1">Welcome to FoodRails</h1>
+        <div class="row">
+    
+          {(rp) => <AllFoods foods = {foods.img} {...rp}/>}
+            
+        </div>
+        <Link to="/new"><button style={button}>Click Here To Get Started</button>
+        {(rp) => <AllFoods foods = {foods} {...rp}/>}
 
         </Link>
         <Switch>

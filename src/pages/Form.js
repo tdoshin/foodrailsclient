@@ -20,6 +20,7 @@ const Form = ({initialFood,history,handleSubmit,buttonLabel}) => {
     return <form onSubmit={handleSubmission}>
         <input
             type="text"
+            placeholder="Enter Food Name"
             onChange={handleChange}
             value={formData.name}
             name="name"
@@ -27,6 +28,7 @@ const Form = ({initialFood,history,handleSubmit,buttonLabel}) => {
 
         <input
             type="text"
+            placeholder="Enter Food recipe"
             onChange={handleChange}
             value={formData.recipe}
             name="recipe"
@@ -34,6 +36,7 @@ const Form = ({initialFood,history,handleSubmit,buttonLabel}) => {
 
         <input
             type="text"
+            placeholder="Insert Image URL"
             onChange={handleChange}
             value={formData.image}
             name="image"

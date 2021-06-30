@@ -10,16 +10,16 @@ const SingleFood= ({foods, match, edit, deleteFood, history}) => {
 
 
     //Styles//////////////////////////////////////
-    const div = {
-        textAlign: "center",
-        border: "3px solid green",
-        width: "40%",
-        margin: "30px auto"
+    // const div = {
+    //     textAlign: "center",
+    //     border: "3px solid green",
+    //     width: "40%",
+    //     margin: "30px auto"
 
-    }
+    // }
     return (
-    <div style={div}>
-        <h1>{food.image}</h1>
+    <div>
+        <img src={food.image}/>
         <h2>{food.recipe}</h2>
         <button onClick={(event) => {
             edit(food)
