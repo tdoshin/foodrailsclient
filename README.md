@@ -3,12 +3,12 @@
 A full CRUD application where a user can create and store food recipe cards
 
 ## Technologies Used
-- JavaScript
+- JavaScript 
 - HTML
 - CSS
 - React CSS Bootstrap
 - Postgresql
-- Rails
+- Rails (For Backend Build)
 - Ruby
 - Heorku (For backend deployment)
 - Netlify (For Frontend deployment)
