@@ -19,7 +19,7 @@ const SingleFood= ({foods, match, edit, deleteFood, history}) => {
     // }
     return (
     <div>
-        <img src={food.image}/>
+        <img src={food.image} alt="food"/>
         <h2>{food.recipe}</h2>
         <button onClick={(event) => {
             edit(food)
