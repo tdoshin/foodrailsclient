@@ -4,9 +4,11 @@ import {Link} from 'react-router-dom'
 
 const SingleFood= ({foods, match, edit, deleteFood, history}) => {
     const id = parseInt(match.params.id)
+    console.log(id)
     const food = foods.find((food) => {
-        return food.id === id
+        return parseInt(food.id) === id
     })
+    console.log(foods)
 
 
     //Styles//////////////////////////////////////
@@ -19,6 +21,7 @@ const SingleFood= ({foods, match, edit, deleteFood, history}) => {
     // }
     return (
     <div>
+        {console.log(food)}
         <img src={food.image} alt="food"/>
         <h2>{food.recipe}</h2>
         <button onClick={(event) => {

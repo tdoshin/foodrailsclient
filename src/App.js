@@ -7,7 +7,10 @@ import {Route,Switch, Link} from "react-router-dom";
 import "./App.css"
 
 
-const url = "https://foodrails.herokuapp.com/foodmodels/"
+// const baseUrl = "https://foodrails.herokuapp.com/"
+const baseUrl = "http://localhost:3000/"
+
+const url = baseUrl + "foodmodels/"
 
 
 function App(props) {
@@ -23,6 +26,7 @@ function App(props) {
 
   //State and Other Variables/////////////////////////////////////
   const [foods, setFoods] = useState([]);
+  const [allFoods, setAllFoods] = useState([]);
 
   const nullFood = {
     name: "",
@@ -35,16 +39,39 @@ function App(props) {
   //Functions ////////////////////////////////////////////////
 
   const getFoods = async() => {
-    const response = await fetch(url)
-    const data = await response.json()
+    const response = await fetch(url, {
+      method: "get",
+      headers: { "Authorization": "Bearer " + authToken },
+    })
+
+    let data = await response.json()
+    if (data.message == "Please log in") {
+      console.log("Please log in")
+      data = []
+    }
     setFoods(data)
+  }
+
+  const getAllFoods = async() => {
+    const response = await fetch(baseUrl + "/foodmodelsall", {
+      method: "get",
+      headers: { "Authorization": "Bearer " + authToken },
+    })
+
+    let data = await response.json()
+    if (data.message == "Please log in") {
+      console.log("Please log in")
+      data = []
+    }
+    setAllFoods(data)
   }
 
   const addFoods = async (newFood) => {
     const response = await fetch(url, {
       method: "post",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + authToken
       },
       body: JSON.stringify(newFood)
     })
@@ -60,7 +87,9 @@ function App(props) {
     const response = await fetch(url + food.id + "/", {
       method: "put",
       headers: {
-        "Content-Type": "application/json"},
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + authToken,
+      },
       body: JSON.stringify(food)
     })
 
@@ -69,19 +98,102 @@ function App(props) {
 
   const deleteFood = async(food) => {
     const response = await fetch (url + food.id + "/", {
-      method: "delete"
+      method: "delete",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + authToken,
+      },
     })
     getFoods()
   }
 
+  ///////////////////
+  // Authentication
+  ///////////////////
+
+  // Username
+  const [username, setUsername] = useState("");
+  const handleUsername = (event) => {
+    setUsername(event.target.value);
+  }
+
+  // Password
+  const [password, setPassword] = useState("");
+  const handlePassword = (event) => {
+    setPassword(event.target.value);
+  }
+
+  // Current user and token
+  const [user, setUser] = useState(null)
+  const [authToken, setAuthToken] = useState("")
+
+  // Login
+  const auth = async (event, args) => {
+    event.preventDefault();
+    
+    // Either be "signup" or "login" 
+    const authType = event.nativeEvent.submitter.name
+
+    const response = await fetch(baseUrl + authType, {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username: username, password: password})
+    })
+    
+    const responseJson = await response.json()
+    if (responseJson.error) {
+      setUser(null)
+      setAuthToken("")
+    } else {
+      setUser(responseJson.user)
+      setAuthToken(responseJson.token)
+    }
+
+    // Clear the username and password input fields
+    setUsername("")
+    setPassword("")
+  }
+
+  const logout = () => {
+    setUser(null)
+    setAuthToken("")
+  }
+
   //useEffects 
 
-  useEffect(() => {getFoods()}, [])
+  useEffect(() => {getFoods(); getAllFoods()}, [authToken])
+
+  const authForm = (
+    <>
+      <form onSubmit={auth}>
+        <label>
+          Username: <input type="text" value={username} onChange={handleUsername} />
+          <br></br>
+          <br/>
+          Password: <input type="text" value={password} onChange={handlePassword} />
+          <br></br>
+        </label>
+        <br></br>
+        <br/>
+        <input type="submit" name="signup" value="Signup" />
+        <input type="submit" name="login" value="Login" />
+      </form>
+    </>
+  )
+  const logoutButton = (
+    <>
+      <h3>Current User: {user && user.username ? user.username : "Logged Out"}</h3>
+      <button onClick={logout}>Logout</button>
+    </>
+  )
  
   //Returned variables
     return (
       <div className="App">
         <h1 className="h1" >Welcome to FoodRails</h1>
+
+        {user ? logoutButton : authForm}
+
         <div class="row">
     
           {(rp) => <AllFoods foods = {foods.img} {...rp}/>}
@@ -89,12 +201,12 @@ function App(props) {
         </div>
         <br/>
 
-        <Link to="/new"><button style={button} style={{borderRadius: "10px"}}>Click Here To Get Started</button>
+        {user ? <Link to="/new"><button style={button} style={{borderRadius: "10px"}}>Click Here To Get Started</button>
         <br/>
         
         {(rp) => <AllFoods foods = {foods} {...rp}/>}
 
-        </Link>
+        </Link> :null}
         <Switch>
           <Route
             exact
@@ -104,7 +216,7 @@ function App(props) {
           />
           <Route
             path="/food/:id"
-            render={(rp) => <SingleFood foods={foods}
+            render={(rp) => <SingleFood foods={allFoods}
             edit={getTargetFood} 
             deleteFood = {deleteFood}
             {...rp}/>}
@@ -126,6 +238,12 @@ function App(props) {
               handleSubmit={updateFood}
               buttonLabel="update food"
               {...rp}/>}
+          
+          />
+          <Route
+            exact
+            path="/all"
+            render={(rp) => <AllFoods foods={allFoods} />}
           
           />
 

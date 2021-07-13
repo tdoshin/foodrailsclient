@@ -10,10 +10,9 @@ const AllFoods = (props) => {
 
     return <div style={div}>
         {
-
-props.foods.map((food) => {
-    return <Food food={food} key={food.id}/>
-})
+            props.foods.map((food) => {
+                return <Food food={food} key={food.id}/>
+            })
         }
 
     </div>
