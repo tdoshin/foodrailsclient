@@ -5,8 +5,8 @@ import {Link} from 'react-router-dom'
 const SingleFood= ({foods, match, edit, deleteFood, history}) => {
     const id = parseInt(match.params.id)
     console.log(id)
-    const food = foods.find((food) => {
-        return parseInt(food.id) === id
+    const foodItem = foods.find((foodItem) => {
+        return parseInt(foodItem.id) === id
     })
     console.log(foods)
 
@@ -21,14 +21,14 @@ const SingleFood= ({foods, match, edit, deleteFood, history}) => {
     // }
     return (
     <div>
-        {console.log(food)}
-        <img src={food.image} alt="food"/>
-        <h2>{food.recipe}</h2>
+        {console.log(foodItem)}
+        <img src={foodItem.image} alt="food"/>
+        <h2>{foodItem.recipe}</h2>
         <button onClick={(event) => {
-            edit(food)
+            edit(foodItem)
         }}>EDIT</button>
         <button onClick ={(event) => {
-            deleteFood(food)
+            deleteFood(foodItem)
             history.push("/")
         }}>DELETE FOOD</button>
         <Link to="/">

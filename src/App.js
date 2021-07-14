@@ -53,7 +53,7 @@ function App(props) {
   }
 
   const getAllFoods = async() => {
-    const response = await fetch(baseUrl + "/foodmodelsall", {
+    const response = await fetch(baseUrl + "foodmodelsall", {
       method: "get",
       headers: { "Authorization": "Bearer " + authToken },
     })
