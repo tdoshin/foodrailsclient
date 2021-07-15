@@ -4,7 +4,8 @@ import AllFoods from "./pages/AllFoods";
 import SingleFood from "./pages/SingleFood";
 import Form from "./pages/Form";
 import {Route,Switch, Link} from "react-router-dom";
-import "./App.css"
+import "./App.css";
+import 'materialize-css/dist/css/materialize.min.css';
 
 
 // const baseUrl = "https://foodrails.herokuapp.com/"
@@ -22,6 +23,7 @@ function App(props) {
     display: "block",
     margin: "auto"
   }
+
 
 
   //State and Other Variables/////////////////////////////////////
@@ -76,6 +78,7 @@ function App(props) {
       body: JSON.stringify(newFood)
     })
     getFoods()
+    getAllFoods()
   }
 
   const getTargetFood = (food) => {
@@ -144,6 +147,7 @@ function App(props) {
     if (responseJson.error) {
       setUser(null)
       setAuthToken("")
+      alert("Please sign up")
     } else {
       setUser(responseJson.user)
       setAuthToken(responseJson.token)
@@ -161,7 +165,10 @@ function App(props) {
 
   //useEffects 
 
-  useEffect(() => {getFoods(); getAllFoods()}, [authToken])
+  useEffect(() => {
+    getFoods(); 
+    getAllFoods()
+  }, [authToken])
 
   const authForm = (
     <>
@@ -191,39 +198,46 @@ function App(props) {
     return (
       <div className="App">
         <h1 className="h1" >Welcome to FoodRails</h1>
-
+        <br/>
+      
+        <p>Store your favorite recipes, share with others</p>
+        
         {user ? logoutButton : authForm}
 
         <div class="row">
     
-          {(rp) => <AllFoods foods = {foods.img} {...rp}/>}
+          {/* {(rp) => <AllFoods foods = {foods.img} {...rp}/>} */}
             
         </div>
         <br/>
 
-        {user ? <Link to="/new"><button style={button} style={{borderRadius: "10px"}}>Click Here To Get Started</button>
+        {user ? <Link to="/create"><button style={button} style={{borderRadius: "10px"}}>Create Food Card</button>
         <br/>
         
-        {(rp) => <AllFoods foods = {foods} {...rp}/>}
+        
+        {/* {(rp) => <AllFoods foods = {foods} {...rp}/>} */}
 
         </Link> :null}
+
         <Switch>
           <Route
             exact
             path="/"
-            render={(rp) => <AllFoods foods = {foods} {...rp}/>}
+            render={(rp) => <AllFoods foods = {allFoods} user = {user} {...rp}/>}
           
           />
           <Route
             path="/food/:id"
-            render={(rp) => <SingleFood foods={allFoods}
-            edit={getTargetFood} 
-            deleteFood = {deleteFood}
+            render={(rp) => <SingleFood 
+              foods={allFoods}
+              edit={getTargetFood} 
+              deleteFood = {deleteFood}
+              user = {user}
             {...rp}/>}
           
           />
           <Route
-            path="/new"
+            path="/create"
             render={(rp) => <Form initialFood={nullFood} 
             handleSubmit={addFoods}
             buttonLabel="create food"

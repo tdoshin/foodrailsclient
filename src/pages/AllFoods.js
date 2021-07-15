@@ -11,7 +11,7 @@ const AllFoods = (props) => {
     return <div style={div}>
         {
             props.foods.map((food) => {
-                return <Food food={food} key={food.id}/>
+                return <Food foodItem={food} user={props.user} key={food.id}/>
             })
         }
 
@@ -21,3 +21,11 @@ const AllFoods = (props) => {
 }
   
   export default AllFoods;
+
+// const AllFoods = (props) => {
+//     props.foods
+//     props.user
+
+// const AllFoods = ({foods, user}) => {
+//     foods
+//     user
