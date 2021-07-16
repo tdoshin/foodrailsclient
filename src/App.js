@@ -10,7 +10,7 @@ import 'materialize-css/dist/css/materialize.min.css';
 
 // const baseUrl = "https://foodrails.herokuapp.com/"
 // const baseUrl = "http://localhost:3000/"
-const baseUrl = "http://foodrailsapplication2-env.eba-u3pmpabm.us-east-2.elasticbeanstalk.com/"
+const baseUrl = "https://foodrailsapplication2-env.eba-u3pmpabm.us-east-2.elasticbeanstalk.com/"
 
 const url = baseUrl + "foodmodels/"
 
