@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Link} from 'react-router-dom'
 
 
-const Form = ({initialFood,history,handleSubmit,buttonLabel}) => {
+const Form = ({initialFood, history, handleSubmit,buttonLabel}) => {
     //The Form State
     const [formData, setFormData] = useState(initialFood)
 

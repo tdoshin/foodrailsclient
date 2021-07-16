@@ -9,7 +9,8 @@ import 'materialize-css/dist/css/materialize.min.css';
 
 
 // const baseUrl = "https://foodrails.herokuapp.com/"
-const baseUrl = "http://localhost:3000/"
+// const baseUrl = "http://localhost:3000/"
+const baseUrl = "http://foodrailsapplication2-env.eba-u3pmpabm.us-east-2.elasticbeanstalk.com/"
 
 const url = baseUrl + "foodmodels/"
 
@@ -65,6 +66,7 @@ function App(props) {
       console.log("Please log in")
       data = []
     }
+    // console.log("data", data)
     setAllFoods(data)
   }
 
@@ -87,7 +89,7 @@ function App(props) {
   }
   
   const updateFood = async(food) => {
-    const response = await fetch(url + food.id + "/", {
+    const response = await fetch(url + food.id +"/", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -97,17 +99,21 @@ function App(props) {
     })
 
     getFoods()
+    getAllFoods()
   }
 
   const deleteFood = async(food) => {
     const response = await fetch (url + food.id + "/", {
       method: "delete",
       headers: {
-        "Content-Type": "application/json",
+        // "Content-Type": "application/json",
         "Authorization": "Bearer " + authToken,
       },
     })
+    // console.log("url", url)
+    // console.log("food id", food.id)
     getFoods()
+    getAllFoods()
   }
 
   ///////////////////
@@ -173,16 +179,18 @@ function App(props) {
   const authForm = (
     <>
       <form onSubmit={auth}>
-        <label>
+        <label style={{fontSize:"20px", color: "black"}}>
           Username: <input type="text" value={username} onChange={handleUsername} />
           <br></br>
           <br/>
-          Password: <input type="text" value={password} onChange={handlePassword} />
+          Password: <input type="password" value={password} onChange={handlePassword} />
           <br></br>
         </label>
         <br></br>
         <br/>
         <input type="submit" name="signup" value="Signup" />
+        <br/>
+        <br/>
         <input type="submit" name="login" value="Login" />
       </form>
     </>
@@ -250,6 +258,7 @@ function App(props) {
             render={(rp) => <Form
               initialFood={targetFood}
               handleSubmit={updateFood}
+              deleteFood = {deleteFood}
               buttonLabel="update food"
               {...rp}/>}
           

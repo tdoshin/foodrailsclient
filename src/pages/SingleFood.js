@@ -13,7 +13,7 @@ const SingleFood= ({foods, match, edit, deleteFood, user, history}) => {
     // console.log(foods)
     // console.log("foodItem", foodItem)
     let userOwnsFood = null;
-    if (foodItem.user_id === user.id) {
+    if (foodItem && user && (foodItem.user_id === user.id)) {
         userOwnsFood = true;
     } else {
         userOwnsFood = false;
@@ -31,25 +31,25 @@ const SingleFood= ({foods, match, edit, deleteFood, user, history}) => {
     }
     return (
     <div>
-        {console.log(foodItem)}
-        <img src={foodItem.image} alt="food"/>
+        <br></br>
+        <img src={foodItem.image} style={{width: "400px"}} alt="food"/>
         <h2>{foodItem.recipe}</h2>
 
         {userOwnsFood ? 
         <>
         <button onClick={(event) => {
             edit(foodItem)
-        }}>EDIT</button>
+        }}>Edit Food</button>
 
         <button onClick ={(event) => {
             deleteFood(foodItem)
             history.push("/")
-        }}>DELETE FOOD</button>
+        }}>Delete Food</button>
         </>
         : null }
 
         <Link to="/">
-            <button>Go back</button>
+            <button>Go Back</button>
         </Link>
     </div>
 
