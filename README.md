@@ -21,7 +21,7 @@ A full CRUD application where a user can create and store food recipe cards. Bac
 
 ## The App 
 
-![image](https://user-images.githubusercontent.com/72947001/124055938-71d08e00-d9ea-11eb-8975-746781ec6cea.png)
+![image](https://user-images.githubusercontent.com/72947001/126040445-e4364197-1c7e-41b5-b116-a5928e6a6e37.png)
 
 ## AWS Elastic Beanstalk 
 Hosted backend on AWS Elastic Beanstalk. With Elastic Beanstalk, I could quickly deploy and manage applications in the AWS Cloud without having to learn about the infrastructure that runs those applications. Elastic Beanstalk reduces management complexity without restricting choice or control. Elastic Beanstalk automatically handles the details of capacity provisioning, load balancing, scaling, and application health monitoring. 3 main parts to hosting
