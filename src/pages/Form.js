@@ -24,7 +24,7 @@ const Form = ({initialFood, history, handleSubmit,buttonLabel}) => {
             onChange={handleChange}
             value={formData.name}
             name="name"
-            style={{padding: "10px", borderRadius: "10px"}}
+            style={{padding: "10px", borderRadius: "10px", color:"white"}}
         />
 
         <br/>
@@ -36,7 +36,7 @@ const Form = ({initialFood, history, handleSubmit,buttonLabel}) => {
             onChange={handleChange}
             value={formData.recipe}
             name="recipe"
-            style={{padding: "10px", borderRadius: "10px"}}
+            style={{padding: "10px", borderRadius: "10px", color:"white"}}
         />
 
         <br/>
@@ -48,7 +48,7 @@ const Form = ({initialFood, history, handleSubmit,buttonLabel}) => {
             onChange={handleChange}
             value={formData.image}
             name="image"
-            style={{padding: "10px", borderRadius: "10px"}}
+            style={{padding: "10px", borderRadius: "10px", color:"white"}}
         />
 
         <br/>

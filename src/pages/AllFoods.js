@@ -1,5 +1,6 @@
 import React from 'react';
 import Food from "../components/Food"
+// import {Navbar, Container, NavDropdown,Nav, Alert} from 'react-bootstrap'
 
 
 const AllFoods = (props) => {
@@ -9,6 +10,7 @@ const AllFoods = (props) => {
     }
 
     return <div style={div}>
+        
         {
             props.foods.map((food) => {
                 return <Food foodItem={food} user={props.user} key={food.id}/>
@@ -22,10 +24,3 @@ const AllFoods = (props) => {
   
   export default AllFoods;
 
-// const AllFoods = (props) => {
-//     props.foods
-//     props.user
-
-// const AllFoods = ({foods, user}) => {
-//     foods
-//     user

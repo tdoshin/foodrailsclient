@@ -16,10 +16,10 @@ const Food = ({foodItem, user}) => {
   return <div>
 
 <Card bg={userOwnsFood ? "success" : ""} style={{ width: '18rem', margin: "10px"}}>
-  <Card.Img variant="top" src="holder.js/100px180" src={foodItem.image} style={{padding: "10px", height: "200px", objectFit: "cover"}}/>
+  <Card.Img variant="top" src="holder.js/100px180" src={foodItem.image} style={{padding: "20px", height: "200px", objectFit: "cover"}}/>
   <Card.Body>
     <Card.Title>{foodItem.name}</Card.Title>
-    <Button variant="success" size="lg"><Link to={`/food/${foodItem.id}`}style={{color: "white"}}>View Recipe</Link></Button>
+    <Button variant="warning" size="sm" ><Link to={`/food/${foodItem.id}`}style={{color: "black", margin:"10px"}}>View Recipe</Link></Button>
   </Card.Body>
 </Card>
     

@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import './index.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'materialize-css/dist/css/materialize.min.css'
+import 'mdbreact/dist/css/mdb.css';
 
 ReactDOM.render(
   <Router>

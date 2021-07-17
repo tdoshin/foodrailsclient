@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
-import React from 'react';
+import {React, reactLogo} from 'react';
 import AllFoods from "./pages/AllFoods";
 import SingleFood from "./pages/SingleFood";
 import Form from "./pages/Form";
 import {Route,Switch, Link} from "react-router-dom";
 import "./App.css";
-import 'materialize-css/dist/css/materialize.min.css';
+import {Navbar, Container, NavDropdown,Nav, Alert} from 'react-bootstrap'
+import { Col, Space, Row, Footer } from 'mdbreact';
 
 
-// const baseUrl = "https://foodrails.herokuapp.com/"
-// const baseUrl = "http://localhost:3000/"
+// Hosting backend using AWS Elastic Beanstalk 
 const baseUrl = "http://foodrailsapplication2-env.eba-u3pmpabm.us-east-2.elasticbeanstalk.com/"
 
 const url = baseUrl + "foodmodels/"
@@ -179,8 +179,8 @@ function App(props) {
   const authForm = (
     <>
       <form onSubmit={auth}>
-        <label style={{fontSize:"20px", color: "black"}}>
-          Username: <input type="text" value={username} onChange={handleUsername} />
+        <label style={{fontSize:"20px", color: "white", fontStyle:"italic", fontWeight:"bolder"}} >
+          Username: <input type="text" style={{fontWeight:"30px", color:"white"}} value={username} onChange={handleUsername} />
           <br></br>
           <br/>
           Password: <input type="password" value={password} onChange={handlePassword} />
@@ -197,33 +197,67 @@ function App(props) {
   )
   const logoutButton = (
     <>
-      <h3>Current User: {user && user.username ? user.username : "Logged Out"}</h3>
+      <h3 style={{color:"white"}}>Current User: {user && user.username ? user.username : "Logged Out"}</h3>
       <button onClick={logout}>Logout</button>
     </>
   )
+ const nav = (        
+   <>
  
+ <Navbar bg="light" expand="lg">
+
+ <Container style={{marginTop:"20px", marginLeft: "0px"}}>
+   <Navbar.Brand href="#home"></Navbar.Brand>
+   <Navbar.Toggle aria-controls="basic-navbar-nav" />
+   <Navbar.Collapse id="basic-navbar-nav">
+     <Nav className="me-auto">
+       <Nav.Link href="/">Home</Nav.Link>
+       <NavDropdown title="Contact" id="basic-nav-dropdown">
+         <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+         <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+         <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+         <NavDropdown.Divider />
+         <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+       </NavDropdown>
+     </Nav>
+   </Navbar.Collapse>
+ </Container>
+</Navbar>
+
+
+</>
+)
+
+const alert = (
+
+<Alert variant="light">
+ <Alert.Heading style={{fontWeight: "bolder", color:"black"}}>Welcome to FoodRails</Alert.Heading>
+ <p style={{fontStyle:"italic"}}>Create, store, and share your favorite recipes, and see others' recipes! </p>
+ <p>Please Signup or Login Below To Get Started</p>
+ <hr />
+</Alert>
+
+)
+
+
   //Returned variables
     return (
       <div className="App">
-        <h1 className="h1" >Welcome to FoodRails</h1>
+        {nav}
         <br/>
-      
-        <p>Store your favorite recipes, share with others</p>
+        <br/>
         
-        {user ? logoutButton : authForm}
+        {user? null : alert}
 
-        <div class="row">
-    
-          {/* {(rp) => <AllFoods foods = {foods.img} {...rp}/>} */}
-            
-        </div>
+      
+        
+{user ? logoutButton : authForm}
+<br/>
+{/* <Footer  className="font-large mt-4" style={{backgroundColor: "black", fontStyle:"italic"}}>Created By Timi Oshin</Footer> */}
         <br/>
 
         {user ? <Link to="/create"><button style={button} style={{borderRadius: "10px"}}>Create Food Card</button>
         <br/>
-        
-        
-        {/* {(rp) => <AllFoods foods = {foods} {...rp}/>} */}
 
         </Link> :null}
 

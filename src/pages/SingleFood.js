@@ -33,7 +33,7 @@ const SingleFood= ({foods, match, edit, deleteFood, user, history}) => {
     <div>
         <br></br>
         <img src={foodItem.image} style={{width: "400px"}} alt="food"/>
-        <h2>{foodItem.recipe}</h2>
+        <h2 style={{color:"white", fontSize:"20px", fontWeight:"bolder"}}>{foodItem.recipe}</h2>
 
         {userOwnsFood ? 
         <>
